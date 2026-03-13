@@ -182,3 +182,17 @@
     border-right-color: var(--border);
   }
 }
+ .image-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+   gap: 1rem;
+   padding: 1rem;
+ }
+ 
+ .image-card img {
+   width: 100%;
+   height: 180px;
+   object-fit: cover;
+   border-radius: 8px;
+   border: 1px solid var(--border);
+ }

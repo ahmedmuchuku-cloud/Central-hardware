@@ -1,25 +1,40 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import itemsData from './data/items.json';
 
+import heroImg from './assets/hero.png';
+import brandLogo from './assets/Logo.png';
+import electrcals from './assets/electrcals.png';
+import plumbing from './assets/plumbing.png';
+import welding from './assets/welding.jpg';
+import engineeringTools from './assets/engineering tools.png';
+import screwsBoards from './assets/screws and boards.png';
+import Juakali from './assets/Juakali.png';
+import locks from './assets/locks and padlockks.png';
+import fundiTools from './assets/fundi tools.png';
+import farmTools from './assets/farm tools.png';
+import utensilsPlasticware from './assets/utensils and plasticware.png';
+import boltsAndScrews from './assets/bolts and screws.png';
+import maliMali from './assets/mali mali.png';
+
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isProductPage, setIsProductPage] = useState(false);
 
-  // Categories map for icons and images (fallback to Unsplash if generated ones fail or aren't enough)
+  // Categories map for icons and images (local assets)
   const categoryMeta = {
-    electricals: { image: "https://images.unsplash.com/photo-1558444479-2704f605c027?auto=format&fit=crop&q=80&w=800", icon: "⚡" },
-    plumbing: { image: "https://images.unsplash.com/photo-1585704032915-c3400ca162e7?auto=format&fit=crop&q=80&w=800", icon: "🔧" },
-    welding: { image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800", icon: "🔥" },
-    engineering_tools: { image: "https://images.unsplash.com/photo-1530124560676-ac6eb1191986?auto=format&fit=crop&q=80&w=800", icon: "🛠️" },
-    screws_boards: { image: "https://images.unsplash.com/photo-1510444335546-950c05769165?auto=format&fit=crop&q=80&w=800", icon: "🪛" },
-    bolts_nuts: { image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=800", icon: "🔩" },
-    juakali: { image: "https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=800", icon: "⚒️" },
-    fundi_tools: { image: "https://images.unsplash.com/photo-1581244276891-663f82ed8347?auto=format&fit=crop&q=80&w=800", icon: "🏗️" },
-    mali_mali: { image: "https://images.unsplash.com/photo-1520038410233-7141be7e6f97?auto=format&fit=crop&q=80&w=800", icon: "🛍️" },
-    utensils_plasticware: { image: "https://images.unsplash.com/photo-1584346133934-a3afd2a33c4c?auto=format&fit=crop&q=80&w=800", icon: "🍽️" },
-    locks_padlocks: { image: "https://images.unsplash.com/photo-1517646287270-a5a1cc1a7f6c?auto=format&fit=crop&q=80&w=800", icon: "🔒" },
-    farm_tools: { image: "https://images.unsplash.com/photo-1589482483515-037130006768?auto=format&fit=crop&q=80&w=800", icon: "🚜" }
+    electricals: { image: electrcals, icon: "⚡" },
+    plumbing: { image: plumbing, icon: "🔧" },
+    welding: { image: welding, icon: "🔥" },
+    engineering_tools: { image: engineeringTools, icon: "🛠️" },
+    screws_boards: { image: screwsBoards, icon: "🪛" },
+    bolts_nuts: { image: boltsAndScrews, icon: "🔩" },
+    juakali: { image: Juakali, icon: "⚒️" },
+    fundi_tools: { image: fundiTools, icon: "🏗️" },
+    mali_mali: { image: maliMali, icon: "🛍️" },
+    utensils_plasticware: { image: utensilsPlasticware, icon: "🍽️" },
+    locks_padlocks: { image: locks, icon: "🔒" },
+    farm_tools: { image: farmTools, icon: "🚜" }
   };
 
   const allItems = useMemo(() => {
@@ -42,39 +57,45 @@ const App = () => {
   if (isProductPage) {
     return (
       <div className="animate-in">
-        <header>
-          <div className="container nav">
-            <div className="logo" style={{cursor: 'pointer'}} onClick={() => setIsProductPage(false)}>
-              CENTRAL <span>HARDWARE</span>
-            </div>
-            <div className="nav-links">
-              <a href="#" onClick={() => setIsProductPage(false)}>Home</a>
-              <a href="#" className="active">Products</a>
-              <a href="#">Contact</a>
-            </div>
+      <header>
+        <div className="container nav" style={{ alignItems: 'center' }}>
+          <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }} onClick={() => setIsProductPage(false)}>
+            <img src={brandLogo} alt="Central Hardware Logo" style={{ height: '2.6rem', width: 'auto' }} />
+            <span style={{ fontWeight: 900, fontSize: '2rem', textTransform: 'uppercase' }}>
+              CENTRAL <span style={{ color: 'var(--accent)' }}>HARDWARE</span>
+            </span>
           </div>
-        </header>
+          <div className="nav-links">
+            <a href="#" className="active" onClick={(e) => { e.preventDefault(); setIsProductPage(false); }}>Home</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); setIsProductPage(true); }}>Collection</a>
+            <a href="#our-story" onClick={(e) => { e.preventDefault(); document.getElementById('our-story')?.scrollIntoView({behavior: 'smooth'}); }}>Our Story</a>
+            <a href="#" onClick={(e) => e.preventDefault()}>Contact</a>
+          </div>
+        </div>
+      </header>
 
-        <main className="container" style={{marginTop: '3rem'}}>
+        <main className="container" style={{marginTop: '5rem'}}>
           <div className="section-title">
-            <h2>Explore Our Inventory</h2>
-            <p>Quality tools and equipment for every need. {filteredItems.length} products available.</p>
+            <h2>Inventory <span>Portal</span></h2>
+            <p>Direct access to {allItems.length}+ premium supplies. Everything under the sun.</p>
           </div>
 
           <div className="filter-bar">
-            <input 
-              type="text" 
-              className="search-input" 
-              placeholder="Search through thousands of items..." 
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <div className="category-chips">
+            <div className="search-container">
+              <input 
+                type="text" 
+                className="search-input" 
+                placeholder="What equipment are you looking for?" 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <div className="chip-scroll">
               <span 
                 className={`chip ${selectedCategory === 'all' ? 'active' : ''}`}
                 onClick={() => setSelectedCategory('all')}
               >
-                All Products
+                All Gear
               </span>
               {categories.map(cat => (
                 <span 
@@ -89,45 +110,59 @@ const App = () => {
           </div>
 
           <div className="product-grid">
-            {filteredItems.slice(0, 48).map(item => (
-              <div key={item.id} className="product-card animate-in">
-                <div className="product-img">
+            {filteredItems.slice(0, 100).map(item => (
+              <div key={item.id} className="product-card">
+                <div className="product-visual">
                   {categoryMeta[item.categoryId]?.icon || '📦'}
                 </div>
                 <div className="product-brand">{item.brand}</div>
                 <h4>{item.name}</h4>
-                <p style={{fontSize: '0.8rem', color: '#64748b', marginBottom: '0.5rem', height: '3em', overflow: 'hidden'}}>{item.description}</p>
-                <div className="product-price">KES {item.price_range}</div>
+                <div className="product-price-label">Price Range</div>
+                <div className="product-price"><span>KES</span> {item.price_range}</div>
               </div>
             ))}
           </div>
           
-          {filteredItems.length > 48 && (
-             <div style={{textAlign: 'center', marginTop: '4rem'}}>
-                <p style={{color: '#64748b'}}>Showing top 48 results. Use search/filter to find more.</p>
+          {filteredItems.length > 100 && (
+             <div style={{textAlign: 'center', marginTop: '6rem', padding: '4rem', background: 'var(--card-bg)', borderRadius: '2rem'}}>
+                <h3 style={{fontSize: '2rem', marginBottom: '1rem'}}>Need More Specifics?</h3>
+                <p style={{color: 'var(--text-muted)'}}>Use the filters above to narrow down your search among our 1,000+ items.</p>
              </div>
           )}
         </main>
 
-        <footer>
+        <footer style={{background: 'var(--primary)', padding: '4rem 0 2rem', marginTop: '4rem'}}>
           <div className="container">
-            <div className="footer-grid">
-              <div className="footer-links">
-                <div className="footer-logo">CENTRAL <span>HARDWARE</span></div>
-                <p style={{color: '#94a3b8'}}>Everything under the sun. Kenya's premier choice for quality hardware and industrial supplies.</p>
+            <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem'}}>
+              <div>
+                <div className="logo" style={{marginBottom: '1rem'}}>CENTRAL <span>HARDWARE</span></div>
+                <p style={{color: 'var(--text-muted)', lineHeight: 1.6}}>Kenya's premier destination for professional tools and hardware supplies. Serving craftsmen across the nation for over 25 years.</p>
               </div>
-              <div className="footer-links">
-                <h4>Categories</h4>
-                <ul>
-                  {categories.slice(0, 5).map(cat => <li key={cat.id}><a href="#">{cat.name}</a></li>)}
+              <div>
+                <h4 style={{color: '#fff', marginBottom: '1.25rem', fontWeight: 700}}>Categories</h4>
+                <ul style={{listStyle: 'none', padding: 0}}>
+                  {categories.slice(0, 5).map(cat => <li key={cat.id} style={{marginBottom: '0.75rem'}}><a href="#" style={{color: 'var(--text-muted)', textDecoration: 'none'}}>{cat.name}</a></li>)}
                 </ul>
               </div>
-              <div className="footer-links">
-                <h4>Contact</h4>
-                <p style={{color: '#94a3b8'}}>Nairobi, Kenya<br/>River Road / Kirinyaga Road<br/>Email: info@centralhardware.ke</p>
+              <div>
+                <h4 style={{color: '#fff', marginBottom: '1.25rem', fontWeight: 700}}>Contact</h4>
+                <p style={{color: 'var(--text-muted)', lineHeight: 1.8}}>
+                  Central Hardware Building<br/>
+                  River Road, Nairobi<br/>
+                  +254 700 000000<br/>
+                  info@centralhardware.co.ke
+                </p>
+              </div>
+              <div>
+                <h4 style={{color: '#fff', marginBottom: '1.25rem', fontWeight: 700}}>Hours</h4>
+                <p style={{color: 'var(--text-muted)', lineHeight: 1.8}}>
+                  Monday - Saturday: 8:00 AM - 7:00 PM<br/>
+                  Sunday: 9:00 AM - 5:00 PM<br/>
+                  Public Holidays: 9:00 AM - 2:00 PM
+                </p>
               </div>
             </div>
-            <div className="footer-bottom">
+            <div style={{borderTop: '1px solid var(--border)', paddingTop: '2rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem'}}>
               &copy; 2026 Central Hardware. All rights reserved.
             </div>
           </div>
@@ -139,107 +174,146 @@ const App = () => {
   return (
     <div className="animate-in">
       <header>
-        <div className="container nav">
-          <div className="logo">CENTRAL <span>HARDWARE</span></div>
+        <div className="container nav" style={{ alignItems: 'center' }}>
+          <div className="logo" style={{ display: 'grid', gridTemplateColumns: '140px auto', alignItems: 'center', gap: '1rem', cursor: 'pointer' }} onClick={() => setIsProductPage(false)}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <img src={brandLogo} alt="Central Hardware Logo" style={{ height: '2.6rem', width: 'auto' }} />
+            </div>
+            <span style={{ fontWeight: 900, fontSize: '2rem', textTransform: 'uppercase' }}>
+              CENTRAL <span style={{ color: 'var(--accent)' }}>HARDWARE</span>
+            </span>
+          </div>
           <div className="nav-links">
-            <a href="#">Home</a>
-            <a href="#" onClick={() => setIsProductPage(true)}>Products</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="#" className="active" onClick={(e) => { e.preventDefault(); setIsProductPage(false); }}>Home</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); setIsProductPage(true); }}>Collection</a>
+            <a href="#our-story" onClick={(e) => { e.preventDefault(); document.getElementById('our-story')?.scrollIntoView({behavior: 'smooth'}); }}>Our Story</a>
+            <a href="#" onClick={(e) => e.preventDefault()}>Contact</a>
           </div>
         </div>
       </header>
 
       <section className="hero">
-        <div className="hero-overlay"></div>
+        <div className="hero-overlay" style={{ background: 'rgba(2, 6, 23, 0.4)' }}></div>
         <img 
-          src="https://images.unsplash.com/photo-1581244276891-663f82ed8347?auto=format&fit=crop&q=80&w=2000" 
-          alt="Central Hardware Interior" 
+          src={heroImg} 
+          alt="Kenyan Fundi working with tools" 
           className="hero-img" 
         />
-        <div className="hero-content">
-          <h1>Everything Under The Sun</h1>
-          <p>The ultimate destination for premium tools, plumbing, electrical, and industrial supplies in Kenya.</p>
-          <a href="#" className="cta-button" onClick={() => setIsProductPage(true)}>Shop Our Collection</a>
+        <div className="container" style={{position: 'relative', zIndex: 2}}>
+          <div className="hero-content">
+            <div className="hero-badge">Est. 1999 • 25 Years of Excellence • Premium Quality</div>
+            <div className="hero-title-row" style={{ display: 'flex', alignItems: 'center' }}>
+              <img src={brandLogo} alt="Central Hardware Logo" style={{ height: '9.1rem', width: 'auto' }} />
+              <h1 style={{ margin: 0, fontWeight: 900, fontSize: 'clamp(2.5rem, 8vw, 5rem)', lineHeight: 1.0 }}>
+                Everything <span>Under The Sun</span>
+              </h1>
+            </div>
+            <p style={{ color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.8)', fontSize: '1.35rem', marginBottom: '2.5rem' }}>From precision engineering tools to local Jua Kali fabrications. We empower every Kenyan fundi with the best equipment.</p>
+            <a href="#" className="cta-button" onClick={() => setIsProductPage(true)}>
+              Explore 1,000+ Items
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
         </div>
       </section>
+      {/* Gallery section rolled back to per-category panels */}
 
       <section className="container">
+        <div className="stats-grid">
+           <div className="stat-item">
+              <h3>1K+</h3>
+              <p>Items in Stock</p>
+           </div>
+           <div className="stat-item">
+              <h3>24/7</h3>
+              <p>Fundi Support</p>
+           </div>
+           <div className="stat-item">
+              <h3>100%</h3>
+              <p>Genuine Brands</p>
+           </div>
+           <div className="stat-item">
+              <h3>254</h3>
+              <p>Locally Fabricated</p>
+           </div>
+        </div>
+
         <div className="section-title">
-          <h2>Our Specialized Categories</h2>
-          <p>Discover our extensive range of products across all hardware sectors.</p>
+          <h2>Tool <span>Categories</span></h2>
+          <p>Explore our specialized range of professional hardware and industrial equipment.</p>
         </div>
 
         <div className="category-grid">
           {categories.map(cat => (
             <div key={cat.id} className="category-card" onClick={() => { setSelectedCategory(cat.id); setIsProductPage(true); }}>
-              <img src={categoryMeta[cat.id]?.image || "https://images.unsplash.com/photo-1581244276891-663f82ed8347?auto=format&fit=crop&q=80&w=800"} alt={cat.name} />
-              <div className="category-info">
-                <div style={{fontSize: '2rem', marginBottom: '0.5rem'}}>{cat.icon}</div>
+              {categoryMeta[cat.id]?.image ? (
+                <img src={categoryMeta[cat.id].image} alt={cat.name} />
+              ) : (
+                <div className="category-icon-only" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '5rem', background: 'var(--card-bg)' }}>
+                  {categoryMeta[cat.id]?.icon}
+                </div>
+              )}
+              <div className="category-content">
+                {!categoryMeta[cat.id]?.image && <div className="category-icon">{cat.icon}</div>}
                 <h3>{cat.name}</h3>
-                <p style={{color: '#64748b', fontSize: '0.9rem'}}>{cat.description}</p>
+                <p style={{color: 'var(--text-muted)', fontSize: '0.95rem'}}>{cat.description}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section style={{background: 'white', padding: '6rem 0'}}>
-        <div className="container" style={{display: 'flex', alignItems: 'center', gap: '4rem', flexWrap: 'wrap'}}>
-          <div style={{flex: 1, minWidth: '300px'}}>
-             <h2 style={{fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--primary)'}}>Why Choose Us?</h2>
-             <ul style={{listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
-                <li style={{display: 'flex', gap: '1rem'}}>
-                   <div style={{background: 'rgba(245, 158, 11, 0.1)', color: 'var(--accent)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontWeight: 800}}>1</div>
-                   <div>
-                      <h4 style={{fontSize: '1.2rem', fontWeight: 700}}>Massive Inventory</h4>
-                      <p style={{color: '#64748b'}}>Over 1,000 unique items in stock across plumbing, electrical, and more.</p>
-                   </div>
-                </li>
-                <li style={{display: 'flex', gap: '1rem'}}>
-                   <div style={{background: 'rgba(245, 158, 11, 0.1)', color: 'var(--accent)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontWeight: 800}}>2</div>
-                   <div>
-                      <h4 style={{fontSize: '1.2rem', fontWeight: 700}}>Premium Quality</h4>
-                      <p style={{color: '#64748b'}}>We stock only the best brands like Bosch, Makita, Schneider, and Yale.</p>
-                   </div>
-                </li>
-                <li style={{display: 'flex', gap: '1rem'}}>
-                   <div style={{background: 'rgba(245, 158, 11, 0.1)', color: 'var(--accent)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontWeight: 800}}>3</div>
-                   <div>
-                      <h4 style={{fontSize: '1.2rem', fontWeight: 700}}>Local Fabrications</h4>
-                      <p style={{color: '#64748b'}}>Supporting Jua Kali artisans with locally made metalware and tools.</p>
-                   </div>
-                </li>
-             </ul>
+      <section id="our-story" style={{padding: '8rem 0', background: 'var(--card-bg)'}}>
+        <div className="container">
+          <div className="section-title">
+            <h2>Our <span>Story</span></h2>
           </div>
-          <div style={{flex: 1, minWidth: '300px'}}>
-             <img src="https://images.unsplash.com/photo-1544722759-390494be9070?auto=format&fit=crop&q=80&w=800" style={{width: '100%', borderRadius: '2rem', boxShadow: 'var(--shadow-lg)'}} alt="Warehouse" />
+          <div style={{maxWidth: '900px', margin: '0 auto'}}>
+            <p style={{fontSize: '1.25rem', lineHeight: 1.8, color: 'var(--text-muted)', marginBottom: '2rem'}}>
+              Central Hardware was founded 25 years ago with a simple mission: to provide Kenyan craftsmen, builders, and engineers with the highest quality tools and equipment at competitive prices. What started as a small shop in Mlolongo, Mombasa Road has grown into Kenya's premier destination for professional hardware supplies.
+            </p>
+            <p style={{fontSize: '1.25rem', lineHeight: 1.8, color: 'var(--text-muted)', marginBottom: '2rem'}}>
+              We understand that behind every project—from a simple home repair to a major construction—there's a Kenyan fundi who deserves reliable tools. That's why we source everything from precision engineering instruments to locally fabricated Jua Kali products, ensuring that you have access tools you can trust.
+            </p>
+            <p style={{fontSize: '1.25rem', lineHeight: 1.8, color: 'var(--text-muted)'}}>
+              Today, we stock over 1,000 items across 12 categories, serving everyone from weekend DIY enthusiasts to large-scale contractors. Our commitment to quality, authenticity, and exceptional service remains the foundation of everything we do. Because at Central Hardware, we believe the right tool can make all the difference.
+            </p>
           </div>
         </div>
       </section>
 
-      <footer>
+      <footer style={{background: 'var(--primary)', padding: '4rem 0 2rem', marginTop: '4rem'}}>
         <div className="container">
-          <div className="footer-grid">
-            <div className="footer-links">
-              <div className="footer-logo">CENTRAL <span>HARDWARE</span></div>
-              <p style={{color: '#94a3b8'}}>Everything under the sun. Kenya's premier choice for quality hardware and industrial supplies.</p>
+          <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem'}}>
+            <div>
+              <div className="logo" style={{marginBottom: '1rem'}}>CENTRAL <span>HARDWARE</span></div>
+              <p style={{color: 'var(--text-muted)', lineHeight: 1.6}}>Kenya's premier destination for professional tools and hardware supplies. Serving craftsmen across the nation for over 25 years.</p>
             </div>
-            <div className="footer-links">
-              <h4>Quick Links</h4>
-              <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Shipping Info</a></li>
-                <li><a href="#">Refund Policy</a></li>
+            <div>
+              <h4 style={{color: '#fff', marginBottom: '1.25rem', fontWeight: 700}}>Categories</h4>
+              <ul style={{listStyle: 'none', padding: 0}}>
+                {categories.slice(0, 5).map(cat => <li key={cat.id} style={{marginBottom: '0.75rem'}}><a href="#" style={{color: 'var(--text-muted)', textDecoration: 'none'}}>{cat.name}</a></li>)}
               </ul>
             </div>
-            <div className="footer-links">
-              <h4>Contact</h4>
-              <p style={{color: '#94a3b8'}}>Nairobi, Kenya<br/>River Road / Kirinyaga Road<br/>Email: info@centralhardware.ke</p>
+            <div>
+              <h4 style={{color: '#fff', marginBottom: '1.25rem', fontWeight: 700}}>Contact</h4>
+              <p style={{color: 'var(--text-muted)', lineHeight: 1.8}}>
+                Central Hardware Building<br/>
+                River Road, Nairobi<br/>
+                +254 700 000000<br/>
+                info@centralhardware.co.ke
+              </p>
+            </div>
+            <div>
+              <h4 style={{color: '#fff', marginBottom: '1.25rem', fontWeight: 700}}>Hours</h4>
+              <p style={{color: 'var(--text-muted)', lineHeight: 1.8}}>
+                Monday - Saturday: 8:00 AM - 7:00 PM<br/>
+                Sunday: 9:00 AM - 5:00 PM<br/>
+                Public Holidays: 9:00 AM - 2:00 PM
+              </p>
             </div>
           </div>
-          <div className="footer-bottom">
+          <div style={{borderTop: '1px solid var(--border)', paddingTop: '2rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem'}}>
             &copy; 2026 Central Hardware. All rights reserved.
           </div>
         </div>

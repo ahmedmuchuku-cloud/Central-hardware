@@ -59,11 +59,9 @@ const App = () => {
       <div className="animate-in">
       <header>
         <div className="container nav" style={{ alignItems: 'center' }}>
-          <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }} onClick={() => setIsProductPage(false)}>
-            <img src={brandLogo} alt="Central Hardware Logo" style={{ height: '2.6rem', width: 'auto' }} />
-            <span style={{ fontWeight: 900, fontSize: '2rem', textTransform: 'uppercase' }}>
-              CENTRAL <span style={{ color: 'var(--accent)' }}>HARDWARE</span>
-            </span>
+          <div className="logo" style={{ cursor: 'pointer' }} onClick={() => setIsProductPage(false)}>
+            <img src={brandLogo} alt="Logo" style={{ height: '2.2rem', width: 'auto' }} />
+            <span>CENTRAL <span>HARDWARE</span></span>
           </div>
           <div className="nav-links">
             <a href="#" className="active" onClick={(e) => { e.preventDefault(); setIsProductPage(false); }}>Home</a>
@@ -175,13 +173,9 @@ const App = () => {
     <div className="animate-in">
       <header>
         <div className="container nav" style={{ alignItems: 'center' }}>
-          <div className="logo" style={{ display: 'grid', gridTemplateColumns: '140px auto', alignItems: 'center', gap: '1rem', cursor: 'pointer' }} onClick={() => setIsProductPage(false)}>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <img src={brandLogo} alt="Central Hardware Logo" style={{ height: '2.6rem', width: 'auto' }} />
-            </div>
-            <span style={{ fontWeight: 900, fontSize: '2rem', textTransform: 'uppercase' }}>
-              CENTRAL <span style={{ color: 'var(--accent)' }}>HARDWARE</span>
-            </span>
+          <div className="logo" style={{ cursor: 'pointer' }} onClick={() => setIsProductPage(false)}>
+            <img src={brandLogo} alt="Logo" style={{ height: '2.2rem', width: 'auto' }} />
+            <span>CENTRAL <span>HARDWARE</span></span>
           </div>
           <div className="nav-links">
             <a href="#" className="active" onClick={(e) => { e.preventDefault(); setIsProductPage(false); }}>Home</a>
@@ -193,7 +187,7 @@ const App = () => {
       </header>
 
       <section className="hero">
-        <div className="hero-overlay" style={{ background: 'rgba(2, 6, 23, 0.4)' }}></div>
+        <div className="hero-overlay"></div>
         <img 
           src={heroImg} 
           alt="Kenyan Fundi working with tools" 
@@ -201,17 +195,16 @@ const App = () => {
         />
         <div className="container" style={{position: 'relative', zIndex: 2}}>
           <div className="hero-content">
-            <div className="hero-badge">Est. 1999 • 25 Years of Excellence • Premium Quality</div>
-            <div className="hero-title-row" style={{ display: 'flex', alignItems: 'center' }}>
-              <img src={brandLogo} alt="Central Hardware Logo" style={{ height: '9.1rem', width: 'auto' }} />
-              <h1 style={{ margin: 0, fontWeight: 900, fontSize: 'clamp(2.5rem, 8vw, 5rem)', lineHeight: 1.0 }}>
+            <div className="hero-badge">Est. 1999 • 25 Years of Excellence</div>
+            <div className="hero-title-row">
+              <h1 style={{ margin: 0 }}>
                 Everything <span>Under The Sun</span>
               </h1>
             </div>
-            <p style={{ color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.8)', fontSize: '1.35rem', marginBottom: '2.5rem' }}>From precision engineering tools to local Jua Kali fabrications. We empower every Kenyan fundi with the best equipment.</p>
+            <p>From precision engineering tools to local Jua Kali fabrications. We empower every Kenyan fundi with the best equipment.</p>
             <a href="#" className="cta-button" onClick={() => setIsProductPage(true)}>
-              Explore 1,000+ Items
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              Explore Collection
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
           </div>
         </div>

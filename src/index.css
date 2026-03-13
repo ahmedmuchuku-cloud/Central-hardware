@@ -161,7 +161,7 @@ nav {
 
 @keyframes subtlePan {
   from { object-position: center; }
-  to { object-position: 55% center; }
+  to { object-position: center; }
 }
 
 .hero-content {
@@ -337,9 +337,18 @@ nav {
 }
 
 @media (max-width: 600px) {
-  .category-content { padding: 0.75rem; }
-  .category-icon { font-size: 1.25rem; margin-bottom: 0.255rem; }
-  .category-content h3 { font-size: 0.75rem; letter-spacing: -0.01em; }
+  .category-content { 
+    padding: 0.4rem; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    background: rgba(2, 6, 23, 0.6);
+  }
+  .category-icon { font-size: 1.1rem; margin-bottom: 0.1rem; }
+  .category-content h3 { font-size: 0.65rem; line-height: 1.1; margin: 0; }
   .category-content p { display: none; }
 }
 
@@ -449,26 +458,30 @@ nav {
 
 @media (max-width: 600px) {
   .product-card {
-    padding: 0.5rem;
-    border-radius: 0.75rem;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
   }
   .product-visual {
-    height: 70px;
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
-  }
-  .product-brand {
-    font-size: 0.55rem;
-  }
-  .product-card h4 {
-    font-size: 0.75rem;
+    height: 60px;
+    font-size: 1.5rem;
     margin-bottom: 0.25rem;
   }
+  .product-brand {
+    font-size: 0.5rem;
+    margin-bottom: 0.1rem;
+  }
+  .product-card h4 {
+    font-size: 0.65rem;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .product-price-label {
-    font-size: 0.6rem;
+    font-size: 0.5rem;
   }
   .product-price {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -619,7 +632,8 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .hero h1 { font-size: 3.5rem; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero p { font-size: 0.95rem; }
   .footer-grid { grid-template-columns: 1fr; }
-  .stats-grid { padding: 2rem; }
+  .stats-grid { padding: 1.5rem; }
 }

@@ -73,52 +73,60 @@ const App = () => {
       </header>
 
         <main className="container" style={{marginTop: '5rem'}}>
-          <div className="section-title">
-            <h2>Inventory <span>Portal</span></h2>
-            <p>Direct access to {allItems.length}+ premium supplies. Everything under the sun.</p>
+          <div className="section-title compact">
+            <h2 style={{fontSize: '1rem'}}>Inventory Portal</h2>
+            <p style={{fontSize: '0.6rem', margin: 0}}>Everything under the sun. Direct access to {allItems.length}+ premium supplies.</p>
           </div>
 
-          <div className="filter-bar">
-            <div className="search-container">
-              <input 
-                type="text" 
-                className="search-input" 
-                placeholder="What equipment are you looking for?" 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <div className="chip-scroll">
-              <span 
-                className={`chip ${selectedCategory === 'all' ? 'active' : ''}`}
-                onClick={() => setSelectedCategory('all')}
-              >
-                All Gear
-              </span>
-              {categories.map(cat => (
-                <span 
-                  key={cat.id} 
-                  className={`chip ${selectedCategory === cat.id ? 'active' : ''}`}
-                  onClick={() => setSelectedCategory(cat.id)}
-                >
-                  {cat.icon} {cat.name}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="product-grid">
-            {filteredItems.slice(0, 100).map(item => (
-              <div key={item.id} className="product-card">
-                <div className="product-visual">
-                  {categoryMeta[item.categoryId]?.icon || '📦'}
+          <div className="collection-layout">
+            <aside className="collection-sidebar">
+              <div className="sidebar-group">
+                <div className="sidebar-label">Categories</div>
+                <div className="sidebar-menu">
+                  <div 
+                    className={`menu-item ${selectedCategory === 'all' ? 'active' : ''}`}
+                    onClick={() => setSelectedCategory('all')}
+                  >
+                    All Equipment
+                  </div>
+                  {categories.map(cat => (
+                    <div 
+                      key={cat.id} 
+                      className={`menu-item ${selectedCategory === cat.id ? 'active' : ''}`}
+                      onClick={() => setSelectedCategory(cat.id)}
+                    >
+                      {cat.name}
+                    </div>
+                  ))}
                 </div>
-                <div className="product-brand">{item.brand}</div>
-                <h4>{item.name}</h4>
-                <div className="product-price-label">Price Range</div>
-                <div className="product-price"><span>KES</span> {item.price_range}</div>
               </div>
-            ))}
+            </aside>
+
+            <div className="collection-main">
+              <div className="search-bar">
+                <input 
+                  type="text" 
+                  className="search-input" 
+                  placeholder="Search 1,000+ items..." 
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+
+              <div className="product-grid">
+                {filteredItems.slice(0, 100).map(item => (
+                  <div key={item.id} className="product-card">
+                    <div className="product-visual">
+                      {categoryMeta[item.categoryId]?.icon || '📦'}
+                    </div>
+                    <div className="product-brand">{item.brand}</div>
+                    <h4>{item.name}</h4>
+                    <div className="product-price-label">Price Range</div>
+                    <div className="product-price"><span>KES</span> {item.price_range}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           
           {filteredItems.length > 100 && (

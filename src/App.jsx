@@ -262,13 +262,13 @@ const App = () => {
             <h2>Our <span>Story</span></h2>
           </div>
           <div style={{maxWidth: '900px', margin: '0 auto'}}>
-            <p style={{fontSize: '1.25rem', lineHeight: 1.8, color: 'var(--text-muted)', marginBottom: '2rem'}}>
+            <p style={{fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--text-muted)', marginBottom: '1rem'}}>
               Central Hardware was founded 25 years ago with a simple mission: to provide Kenyan craftsmen, builders, and engineers with the highest quality tools and equipment at competitive prices. What started as a small shop in Mlolongo, Mombasa Road has grown into Kenya's premier destination for professional hardware supplies.
             </p>
-            <p style={{fontSize: '1.25rem', lineHeight: 1.8, color: 'var(--text-muted)', marginBottom: '2rem'}}>
+            <p style={{fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--text-muted)', marginBottom: '1rem'}}>
               We understand that behind every project—from a simple home repair to a major construction—there's a Kenyan fundi who deserves reliable tools. That's why we source everything from precision engineering instruments to locally fabricated Jua Kali products, ensuring that you have access tools you can trust.
             </p>
-            <p style={{fontSize: '1.25rem', lineHeight: 1.8, color: 'var(--text-muted)'}}>
+            <p style={{fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--text-muted)'}}>
               Today, we stock over 1,000 items across 12 categories, serving everyone from weekend DIY enthusiasts to large-scale contractors. Our commitment to quality, authenticity, and exceptional service remains the foundation of everything we do. Because at Central Hardware, we believe the right tool can make all the difference.
             </p>
           </div>

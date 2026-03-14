@@ -249,6 +249,7 @@ const App = () => {
               <div className="category-content">
                 {!categoryMeta[cat.id]?.image && <div className="category-icon">{cat.icon}</div>}
                 <h3>{cat.name}</h3>
+                <p>{cat.description}</p>
               </div>
             </div>
           ))}

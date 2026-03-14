@@ -185,7 +185,7 @@ nav {
   padding-left: 1rem;
 }
 .section-title h2 { font-size: 1.5rem; font-weight: 900; color: #fff; }
-.section-title p { color: var(--text-muted); font-size: 0.85rem; }
+.section-title p { color: var(--text-muted); font-size: 0.75rem; }
 
 @media (max-width: 600px) {
   .section-title { margin: 2rem 0 1rem; }
@@ -230,16 +230,16 @@ nav {
 }
 
 .category-content h3 {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.1rem;
 }
 
 .category-content p {
   color: var(--text-muted);
-  font-size: 0.7rem;
-  line-height: 1.3;
+  font-size: 0.55rem;
+  line-height: 1.2;
   opacity: 0;
   max-height: 0;
   overflow: hidden;
@@ -283,10 +283,10 @@ nav {
   font-size: 2rem;
 }
 
-.product-brand { color: var(--accent); font-size: 0.6rem; text-transform: uppercase; font-weight: 700; margin-bottom: 0.2rem; }
-.product-card h4 { font-size: 0.85rem; color: #fff; margin-bottom: 0.5rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.product-price-label { font-size: 0.6rem; color: var(--text-muted); margin-top: auto; }
-.product-price { font-size: 1rem; font-weight: 800; color: #fff; }
+.product-brand { color: var(--accent); font-size: 0.5rem; text-transform: uppercase; font-weight: 700; margin-bottom: 0.2rem; }
+.product-card h4 { font-size: 0.7rem; color: #fff; margin-bottom: 0.5rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.product-price-label { font-size: 0.5rem; color: var(--text-muted); margin-top: auto; }
+.product-price { font-size: 0.85rem; font-weight: 800; color: #fff; }
 
 @media (max-width: 600px) {
   .product-card { padding: 0.4rem; }

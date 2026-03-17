@@ -105,10 +105,12 @@ const App = () => {
 
   const sendWhatsAppQuote = () => {
     if (quoteCart.length === 0) return;
+    const total = quoteCart.reduce((sum, item) => sum + parseInt(item.price_range.replace(/\D/g, '') || 0, 10), 0);
     let message = "*Order Inquiry - Central Hardware*\n\n";
     quoteCart.forEach((item, index) => {
-      message += `${index + 1}. *${item.name}*\n   Brand: ${item.brand || 'N/A'}\n   Price: KES ${item.price_range}\n   Item ID: #${item.id}\n\n`;
+      message += `${index + 1}. *${item.name}*\n   Brand: ${item.brand || 'N/A'}\n   Price: KES ${item.price_range}\n   Qty: 1\n\n`;
     });
+    message += `*TOTAL BALANCE: KES ${total.toLocaleString()}*\n`;
     message += `*Total Items:* ${quoteCart.length}\n\n_Please confirm availability and current pricing._`;
     const encodedText = encodeURIComponent(message);
     window.open(`https://wa.me/254701006983?text=${encodedText}`, '_blank');
@@ -347,6 +349,12 @@ User Question: ${chatInput}`;
                 <td style={{ textAlign: 'right' }}>{item.price_range}</td>
               </tr>
             ))}
+            <tr>
+              <td colSpan="3" style={{ textAlign: 'right', fontWeight: 900, background: '#f8fafc' }}>TOTAL ESTIMATE</td>
+              <td style={{ textAlign: 'right', fontWeight: 900, background: '#f8fafc' }}>
+                KES {quoteCart.reduce((sum, item) => sum + parseInt(item.price_range.replace(/\D/g, '') || 0, 10), 0).toLocaleString()}
+              </td>
+            </tr>
           </tbody>
         </table>
 
@@ -617,12 +625,6 @@ User Question: ${chatInput}`;
             </div>
           </div>
           
-          {filteredItems.length > 100 && (
-             <div style={{textAlign: 'center', marginTop: '6rem', padding: '4rem', background: 'var(--card-bg)', borderRadius: '2rem'}}>
-                <h3 style={{fontSize: '2rem', marginBottom: '1rem'}}>Need More Specifics?</h3>
-                <p style={{color: 'var(--text-muted)'}}>Use the filters above to narrow down your search among our 1,000+ items.</p>
-             </div>
-          )}
         </main>
       ) : (
         <>
@@ -1051,7 +1053,11 @@ User Question: ${chatInput}`;
             <div className="cart-drawer-header">
               <div>
                 <h2>Collection</h2>
-                <p>{quoteCart.length} Items Selected</p>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                  <p>{quoteCart.length} Items</p>
+                  <span style={{ color: 'var(--accent)', fontWeight: 900 }}>|</span>
+                  <p style={{ color: 'var(--accent)', fontWeight: 900 }}>KES {quoteCart.reduce((sum, item) => sum + parseInt(item.price_range.replace(/\D/g, '') || 0, 10), 0).toLocaleString()}</p>
+                </div>
               </div>
               <button onClick={() => setCartOpen(false)} className="cart-close-btn">×</button>
             </div>

@@ -299,7 +299,7 @@ User Question: ${chatInput}`;
           <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
             <a href="#" className={!isProductPage ? "active" : ""} onClick={(e) => { e.preventDefault(); setIsProductPage(false); }}>Home</a>
             <a href="#" className={isProductPage ? "active" : ""} onClick={(e) => { e.preventDefault(); setIsProductPage(true); }}>Products</a>
-            <a href="#our-story" onClick={(e) => { e.preventDefault(); document.getElementById('our-story')?.scrollIntoView({behavior: 'smooth'}); }} style={{ color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: 600 }}>About Us</a>
+            {!isProductPage && <a href="#our-story" onClick={(e) => { e.preventDefault(); document.getElementById('our-story')?.scrollIntoView({behavior: 'smooth'}); }} style={{ color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: 600 }}>About Us</a>}
             <div 
               className="cart-icon-trigger" 
               onClick={() => setCartOpen(true)} 
@@ -743,121 +743,119 @@ User Question: ${chatInput}`;
           
 
 
+
+          {/* About Us & Contact ONLY on Home */}
+          <section id="our-story" style={{padding: '5rem 0', background: 'var(--card-bg)', borderTop: '1px solid var(--border)'}}>
+            <div className="container">
+              <div className="section-title">
+                <h2>About <span>Us</span></h2>
+                <p style={{ marginTop: '0.5rem', color: 'var(--accent)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.8rem' }}>
+                  Empowering Kenya’s Builders
+                </p>
+              </div>
+              
+              <div style={{maxWidth: '850px', margin: '0 auto'}}>
+                <p style={{fontSize: '1rem', lineHeight: 1.6, color: '#fff', marginBottom: '2.5rem', textAlign: 'center', opacity: 0.9}}>
+                  From our humble beginnings, Central Hardware has grown into Kenya’s trusted partner for professional-grade tools and equipment. 
+                  We bridge the gap between global innovation and local craftsmanship.
+                </p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? 'repeat(3, 1fr)' : '1fr', gap: '2rem' }}>
+                  <div>
+                    <h4 style={{ color: 'var(--accent)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 900 }}>Curated Selection</h4>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                      Thousands of products across 12 categories, from precision engineering kits to robust Jua Kali tools.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 style={{ color: 'var(--accent)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 900 }}>For Every Project</h4>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                      Whether you are a weekend DIYer or a lead contractor, we provide the reliability you need.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 style={{ color: 'var(--accent)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 900 }}>Our Commitment</h4>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                      High quality, competitive pricing, and a deep respect for the Kenyan fundi.
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: '4rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2.5rem' }}>
+                   <p style={{ fontSize: '1.2rem', fontWeight: 900, fontStyle: 'italic', letterSpacing: '0.05em' }}>
+                    "The right tool makes all the difference. We make sure you have it."
+                   </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="contact" style={{ background: '#000', borderTop: '1px solid var(--border)' }}>
+            <div className="container" style={{ padding: 0 }}>
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'row', 
+                alignItems: 'stretch',
+                minHeight: window.innerWidth < 768 ? '250px' : '450px'
+              }}>
+                <div style={{ 
+                  flex: window.innerWidth < 768 ? '0 0 30%' : '0 0 25%', 
+                  padding: window.innerWidth < 768 ? '1rem 0.75rem' : '3rem 2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  background: 'rgba(255,255,255,0.02)'
+                }}>
+                  <div className="section-title" style={{ textAlign: 'left', margin: 0 }}>
+                    <h2 style={{ fontSize: window.innerWidth < 768 ? '1rem' : '1.4rem' }}>Visit <span>Us</span></h2>
+                  </div>
+                  <div style={{ marginTop: window.innerWidth < 768 ? '0.25rem' : '1rem' }}>
+                    <p style={{ color: '#fff', fontSize: window.innerWidth < 768 ? '0.7rem' : '0.9rem', fontWeight: 700, marginBottom: '0.1rem' }}>Central Hardware</p>
+                    <p style={{ color: 'var(--text-muted)', fontSize: window.innerWidth < 768 ? '0.6rem' : '0.8rem', marginBottom: window.innerWidth < 768 ? '0.75rem' : '1.5rem', lineHeight: '1.3' }}>
+                      Kwa Kalembe, Mlolongo,<br />
+                      Kenya
+                    </p>
+                    
+                    <a href="https://wa.me/254701006983" target="_blank" rel="noreferrer" style={{ 
+                      display: 'inline-flex', 
+                      alignItems: 'center', 
+                      gap: '0.3rem', 
+                      background: '#25D366', 
+                      color: '#fff', 
+                      padding: window.innerWidth < 768 ? '0.3rem 0.5rem' : '0.6rem 1.2rem', 
+                      borderRadius: '6px', 
+                      textDecoration: 'none', 
+                      fontWeight: 800, 
+                      fontSize: window.innerWidth < 768 ? '0.55rem' : '0.8rem',
+                      transition: 'var(--transition)'
+                    }}>
+                      <svg width={window.innerWidth < 768 ? "12" : "18"} height={window.innerWidth < 768 ? "12" : "18"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                      WhatsApp
+                    </a>
+                  </div>
+                </div>
+
+                <div style={{ 
+                  flex: '1', 
+                  borderLeft: '1px solid var(--border)',
+                  filter: 'invert(1) hue-rotate(180deg) contrast(1.1) brightness(0.9)',
+                  position: 'relative'
+                }}>
+                  <iframe 
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Kwa+Kalembe,+Mlolongo,+Kenya&zoom=17" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen="" 
+                    loading="lazy"
+                    title="Kwa Kalembe Mlolongo Map">
+                  </iframe>
+                </div>
+              </div>
+            </div>
+          </section>
         </>
       )}
-
-      {/* Persistent Footer Sections */}
-      <section id="our-story" style={{padding: '5rem 0', background: 'var(--card-bg)', borderTop: '1px solid var(--border)'}}>
-        <div className="container">
-          <div className="section-title">
-            <h2>About <span>Us</span></h2>
-            <p style={{ marginTop: '0.5rem', color: 'var(--accent)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.8rem' }}>
-              Empowering Kenya’s Builders
-            </p>
-          </div>
-          
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            <p style={{fontSize: '1rem', lineHeight: 1.6, color: '#fff', marginBottom: '2.5rem', textAlign: 'center', opacity: 0.9}}>
-              From our humble beginnings, Central Hardware has grown into Kenya’s trusted partner for professional-grade tools and equipment. 
-              We bridge the gap between global innovation and local craftsmanship.
-            </p>
-
-            <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? 'repeat(3, 1fr)' : '1fr', gap: '2rem' }}>
-              <div>
-                <h4 style={{ color: 'var(--accent)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 900 }}>Curated Selection</h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                  Thousands of products across 12 categories, from precision engineering kits to robust Jua Kali tools.
-                </p>
-              </div>
-              <div>
-                <h4 style={{ color: 'var(--accent)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 900 }}>For Every Project</h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                  Whether you are a weekend DIYer or a lead contractor, we provide the reliability you need.
-                </p>
-              </div>
-              <div>
-                <h4 style={{ color: 'var(--accent)', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 900 }}>Our Commitment</h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                  High quality, competitive pricing, and a deep respect for the Kenyan fundi.
-                </p>
-              </div>
-            </div>
-
-            <div style={{ marginTop: '4rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2.5rem' }}>
-               <p style={{ fontSize: '1.2rem', fontWeight: 900, fontStyle: 'italic', letterSpacing: '0.05em' }}>
-                "The right tool makes all the difference. We make sure you have it."
-               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" style={{ background: '#000', borderTop: '1px solid var(--border)' }}>
-        <div className="container" style={{ padding: 0 }}>
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: 'row', // Side-by-side always
-            alignItems: 'stretch',
-            minHeight: window.innerWidth < 768 ? '250px' : '450px'
-          }}>
-            {/* Contact Info Side */}
-            <div style={{ 
-              flex: window.innerWidth < 768 ? '0 0 30%' : '0 0 25%', 
-              padding: window.innerWidth < 768 ? '1rem 0.75rem' : '3rem 2rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              background: 'rgba(255,255,255,0.02)'
-            }}>
-              <div className="section-title" style={{ textAlign: 'left', margin: 0 }}>
-                <h2 style={{ fontSize: window.innerWidth < 768 ? '1rem' : '1.4rem' }}>Visit <span>Us</span></h2>
-              </div>
-              <div style={{ marginTop: window.innerWidth < 768 ? '0.25rem' : '1rem' }}>
-                <p style={{ color: '#fff', fontSize: window.innerWidth < 768 ? '0.7rem' : '0.9rem', fontWeight: 700, marginBottom: '0.1rem' }}>Central Hardware</p>
-                <p style={{ color: 'var(--text-muted)', fontSize: window.innerWidth < 768 ? '0.6rem' : '0.8rem', marginBottom: window.innerWidth < 768 ? '0.75rem' : '1.5rem', lineHeight: '1.3' }}>
-                  Kwa Kalembe, Mlolongo,<br />
-                  Kenya
-                </p>
-                
-                <a href="https://wa.me/254701006983" target="_blank" rel="noreferrer" style={{ 
-                  display: 'inline-flex', 
-                  alignItems: 'center', 
-                  gap: '0.3rem', 
-                  background: '#25D366', 
-                  color: '#fff', 
-                  padding: window.innerWidth < 768 ? '0.3rem 0.5rem' : '0.6rem 1.2rem', 
-                  borderRadius: '6px', 
-                  textDecoration: 'none', 
-                  fontWeight: 800, 
-                  fontSize: window.innerWidth < 768 ? '0.55rem' : '0.8rem',
-                  transition: 'var(--transition)'
-                }}>
-                  <svg width={window.innerWidth < 768 ? "12" : "18"} height={window.innerWidth < 768 ? "12" : "18"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                  WhatsApp
-                </a>
-              </div>
-            </div>
-
-            {/* Map Side */}
-            <div style={{ 
-              flex: '1', 
-              borderLeft: '1px solid var(--border)',
-              filter: 'invert(1) hue-rotate(180deg) contrast(1.1) brightness(0.9)',
-              position: 'relative'
-            }}>
-              <iframe 
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Kwa+Kalembe,+Mlolongo,+Kenya&zoom=17" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen="" 
-                loading="lazy"
-                title="Kwa Kalembe Mlolongo Map">
-              </iframe>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Global Components */}
       {isChatOpen && (

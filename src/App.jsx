@@ -98,20 +98,31 @@ const App = () => {
       if (exists) {
         return prev.filter(i => i.id !== item.id);
       } else {
-        return [...prev, item];
+        return [...prev, { ...item, quantity: 1 }];
       }
     });
   };
 
+  const updateQuantity = (id, delta) => {
+    setQuoteCart(prev => prev.map(item => {
+      if (item.id === id) {
+        const newQty = Math.max(1, item.quantity + delta);
+        return { ...item, quantity: newQty };
+      }
+      return item;
+    }));
+  };
+
   const sendWhatsAppQuote = () => {
     if (quoteCart.length === 0) return;
-    const total = quoteCart.reduce((sum, item) => sum + parseInt(item.price_range.replace(/\D/g, '') || 0, 10), 0);
+    const total = quoteCart.reduce((sum, item) => sum + (parseInt(item.price_range.replace(/\D/g, '') || 0, 10) * item.quantity), 0);
     let message = "*Order Inquiry - Central Hardware*\n\n";
     quoteCart.forEach((item, index) => {
-      message += `${index + 1}. *${item.name}*\n   Brand: ${item.brand || 'N/A'}\n   Price: KES ${item.price_range}\n   Qty: 1\n\n`;
+      const lineTotal = parseInt(item.price_range.replace(/\D/g, '') || 0, 10) * item.quantity;
+      message += `${index + 1}. *${item.name}*\n   Brand: ${item.brand || 'N/A'}\n   Price: KES ${item.price_range}\n   Qty: ${item.quantity}\n   Subtotal: KES ${lineTotal.toLocaleString()}\n\n`;
     });
     message += `*TOTAL BALANCE: KES ${total.toLocaleString()}*\n`;
-    message += `*Total Items:* ${quoteCart.length}\n\n_Please confirm availability and current pricing._`;
+    message += `*Total Items:* ${quoteCart.reduce((sum, i) => sum + i.quantity, 0)}\n\n_Please confirm availability and current pricing._`;
     const encodedText = encodeURIComponent(message);
     window.open(`https://wa.me/254701006983?text=${encodedText}`, '_blank');
   };
@@ -310,7 +321,7 @@ User Question: ${chatInput}`;
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
               {quoteCart.length > 0 && (
                 <span style={{ position: 'absolute', top: '-8px', right: '-10px', background: 'var(--accent)', color: '#000', borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', fontWeight: 900 }}>
-                  {quoteCart.length}
+                  {quoteCart.reduce((sum, item) => sum + item.quantity, 0)}
                 </span>
               )}
             </div>
@@ -335,25 +346,32 @@ User Question: ${chatInput}`;
         <table className="print-table">
           <thead>
             <tr>
-              <th style={{ width: '40pt' }}>#</th>
+              <th style={{ width: '30pt' }}>#</th>
               <th>Product Specification</th>
               <th>Brand</th>
-              <th style={{ textAlign: 'right' }}>Price Guide (KES)</th>
+              <th style={{ textAlign: 'center', width: '40pt' }}>Qty</th>
+              <th style={{ textAlign: 'right', width: '80pt' }}>Price (KES)</th>
+              <th style={{ textAlign: 'right', width: '80pt' }}>Total (KES)</th>
             </tr>
           </thead>
           <tbody>
-            {quoteCart.map((item, index) => (
-              <tr key={item.id}>
-                <td>{index + 1}</td>
-                <td style={{ fontWeight: 600 }}>{item.name}</td>
-                <td>{item.brand || 'Generic'}</td>
-                <td style={{ textAlign: 'right' }}>{item.price_range}</td>
-              </tr>
-            ))}
+            {quoteCart.map((item, index) => {
+              const price = parseInt(item.price_range.replace(/\D/g, '') || 0, 10);
+              return (
+                <tr key={item.id}>
+                  <td>{index + 1}</td>
+                  <td style={{ fontWeight: 600 }}>{item.name}</td>
+                  <td>{item.brand || 'Generic'}</td>
+                  <td style={{ textAlign: 'center' }}>{item.quantity}</td>
+                  <td style={{ textAlign: 'right' }}>{item.price_range}</td>
+                  <td style={{ textAlign: 'right', fontWeight: 600 }}>{(price * item.quantity).toLocaleString()}</td>
+                </tr>
+              );
+            })}
             <tr>
-              <td colSpan="3" style={{ textAlign: 'right', fontWeight: 900, background: '#f8fafc' }}>TOTAL ESTIMATE</td>
-              <td style={{ textAlign: 'right', fontWeight: 900, background: '#f8fafc' }}>
-                KES {quoteCart.reduce((sum, item) => sum + parseInt(item.price_range.replace(/\D/g, '') || 0, 10), 0).toLocaleString()}
+              <td colSpan="5" style={{ textAlign: 'right', fontWeight: 900, background: '#f8fafc', padding: '10pt' }}>TOTAL ESTIMATE</td>
+              <td style={{ textAlign: 'right', fontWeight: 900, background: '#f8fafc', padding: '10pt' }}>
+                KES {quoteCart.reduce((sum, item) => sum + (parseInt(item.price_range.replace(/\D/g, '') || 0, 10) * item.quantity), 0).toLocaleString()}
               </td>
             </tr>
           </tbody>
@@ -1055,9 +1073,9 @@ User Question: ${chatInput}`;
               <div>
                 <h2>Collection</h2>
                 <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                  <p>{quoteCart.length} Items</p>
+                  <p>{quoteCart.length} Unique Items</p>
                   <span style={{ color: 'var(--accent)', fontWeight: 900 }}>|</span>
-                  <p style={{ color: 'var(--accent)', fontWeight: 900 }}>KES {quoteCart.reduce((sum, item) => sum + parseInt(item.price_range.replace(/\D/g, '') || 0, 10), 0).toLocaleString()}</p>
+                  <p style={{ color: 'var(--accent)', fontWeight: 900 }}>KES {quoteCart.reduce((sum, item) => sum + (parseInt(item.price_range.replace(/\D/g, '') || 0, 10) * item.quantity), 0).toLocaleString()}</p>
                 </div>
               </div>
               <button onClick={() => setCartOpen(false)} className="cart-close-btn">×</button>
@@ -1082,6 +1100,17 @@ User Question: ${chatInput}`;
                     <div className="cart-item-info">
                       <h4>{item.name}</h4>
                       <p>KES {item.price_range}</p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.4rem' }}>
+                         <button 
+                           onClick={() => updateQuantity(item.id, -1)}
+                           style={{ width: '24px', height: '24px', borderRadius: '4px', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem' }}
+                         >-</button>
+                         <span style={{ fontSize: '0.8rem', fontWeight: 900, minWidth: '20px', textAlign: 'center' }}>{item.quantity}</span>
+                         <button 
+                           onClick={() => updateQuantity(item.id, 1)}
+                           style={{ width: '24px', height: '24px', borderRadius: '4px', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem' }}
+                         >+</button>
+                      </div>
                     </div>
                     <button onClick={() => toggleQuoteItem(item)} className="cart-item-remove">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>

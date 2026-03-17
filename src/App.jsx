@@ -320,14 +320,15 @@ User Question: ${chatInput}`;
 
       {/* Hidden Print Section */}
       <div id="print-quote">
-        <div className="print-header">
-          <div>
-            <h1>CENTRAL <span>HARDWARE</span></h1>
-            <p style={{ color: '#666', fontSize: '10pt', marginTop: '5pt' }}>Industrial Supplier | Kwa Kalembe, Mlolongo</p>
+        <div className="print-header" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', borderBottom: '2pt solid #000', paddingBottom: '15pt', marginBottom: '25pt' }}>
+          <img src={brandLogo} alt="Logo" style={{ height: '4rem', width: 'auto' }} />
+          <div style={{ flex: 1 }}>
+            <h1 style={{ margin: 0, fontSize: '24pt', fontWeight: 900 }}>CENTRAL <span style={{ color: '#fbbf24' }}>HARDWARE</span></h1>
+            <p style={{ color: '#666', fontSize: '10pt', marginTop: '2pt', margin: 0 }}>Industrial Supplier | Kwa Kalembe, Mlolongo</p>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <p style={{ fontSize: '14pt', fontWeight: 800 }}>PROFORMA QUOTE</p>
-            <p style={{ fontSize: '9pt', color: '#666' }}>Date: {new Date().toLocaleDateString()}</p>
+            <p style={{ fontSize: '14pt', fontWeight: 800, margin: 0 }}>PROFORMA QUOTE</p>
+            <p style={{ fontSize: '9pt', color: '#666', margin: 0 }}>Date: {new Date().toLocaleDateString()}</p>
           </div>
         </div>
         
